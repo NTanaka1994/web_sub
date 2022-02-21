@@ -479,7 +479,7 @@ def dm_ajax():
     res=res+"</table>"
     return res
         
-#掲示板
+#掲示板(
 
 #クリックジャッキング
 @app.after_request
