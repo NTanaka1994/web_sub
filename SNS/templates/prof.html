@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="static/hummenu.css">
+        <div class="hamburger-menu">
+            <input type="checkbox" id="menu-btn-check">
+            <label for="menu-btn-check" class="menu-btn"><span></span></label>
+            <div class="menu-content">
+                <ul>
+                    <li>
+                        <a href="home">プロフィール</a>
+                    </li>
+                    <li>
+                        <a href="find">ユーザ検索</a>
+                    </li>
+                    <li>
+                        <a href="dmfind">DM</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <title>プロフィール編集</title>
+    </head>
+    <body>
+        <form method="POST" action="prof">
+            <table align="center">
+                <tr><td>プロフィール</td><td><textarea name="greet">{{greet|safe}}</textarea></td></tr>
+                <tr><td>URL</td><td><input type="url" name="url" value="{{url|safe}}"></td></tr>
+                <tr><td>生年月日</td><td><input type="date" name="birth" value="{{birth|safe}}"></td></tr>
+                <tr><td>住所</td><td><input type="text" name="loc" value="{{loc|safe}}"></td></tr>
+                <tr><td colspan="2"><input type="submit" value="更新"></td></tr>
+            </table>
+            <input type="hidden" name="prof" value="{{token|safe}}">
+        </form>
+    </body>
+</html>

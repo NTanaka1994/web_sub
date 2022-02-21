@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <title>ユーザ一覧</title>
+    </head>
+    <body>
+        <form method="GET" action="dmfind">
+            <table align="center">
+                <tr><td>キーワード</td><td><input type="text" name="key"></td><td><input type="submit" value="検索"></td></tr>
+                <tr><td colspan="3" align="center"><a href="dmfind">キーワードのリセット</a></td></tr>
+            </table>
+        </form>
+        <table align="center" border="1">
+            {{res|safe}}
+        </table>
+    </body>
+</html>

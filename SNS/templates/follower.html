@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="static/hummenu.css">
+        <div class="hamburger-menu">
+            <input type="checkbox" id="menu-btn-check">
+            <label for="menu-btn-check" class="menu-btn"><span></span></label>
+            <div class="menu-content">
+                <ul>
+                    <li>
+                        <a href="home">プロフィール</a>
+                    </li>
+                    <li>
+                        <a href="find">ユーザ検索</a>
+                    </li>
+                    <li>
+                        <a href="dmfind">DM</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <title>{{user_id|safe}}のフォロワー</title>
+    </head>
+    <body>
+        <table align="center" border="1">
+            {{res|safe}}
+        </table>
+    </body>
+</html>

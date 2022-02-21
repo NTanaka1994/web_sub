@@ -1,0 +1,82 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="static/hummenu.css">
+        <div class="hamburger-menu">
+            <input type="checkbox" id="menu-btn-check">
+            <label for="menu-btn-check" class="menu-btn"><span></span></label>
+            <div class="menu-content">
+                <ul>
+                    <li>
+                        <a href="home">プロフィール</a>
+                    </li>
+                    <li>
+                        <a href="find">ユーザ検索</a>
+                    </li>
+                    <li>
+                        <a href="dmfind">DM</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <title>DM</title>
+        <style>
+            #wrapper {
+                height: 200px;
+                width: 300px;
+                left: 50%;
+                overflow-y: scroll;
+            }
+        </style>
+        <script>
+            function dmajax(){
+                var url="dm_ajax?src_id={{src_id|safe}}&dst_id={{dst_id|safe}}";
+                var res = "";
+                var req = new XMLHttpRequest();
+                req.onreadystatechange = function () {
+                    if (req.readyState == 4 && req.status == 200) {
+                        res = req.responseText;
+                        console.log(res);
+                    }
+                };
+                req.open("GET", url, false);
+                req.send(null);
+                let target=document.getElementById("scroll-inner");
+                target.innerHTML=res;
+                target.scrollIntoView(false);
+                setTimeout(function(){
+                    dmajax();
+                },1000)
+            }
+            window.addEventListener("load",function(){
+                let target = document.getElementById('scroll-inner');
+                target.scrollIntoView(false);
+                setTimeout(function(){
+                    dmajax();
+                },1000)
+            });
+            
+        </script>
+    </head>
+    <body>
+        <div class="scroll" style="height: 75%;overflow-y:scroll;">
+            <div id="scroll-inner">
+                <table align="center">
+                    {{res|safe}}
+                </table>
+            </div>
+        </div>
+        <table align="center">
+            <tr>
+                <td>
+                    <form action="dm" method="POST">
+                        <input type="hidden" name="dm" value="{{token|safe}}">
+                        <input type="hidden" name="src_id" value="{{src_id|safe}}">
+                        <input type="hidden" name="dst_id" value="{{dst_id|safe}}">
+                        <textarea name="text"></textarea>
+                        <input type="submit" value="送信">
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>
