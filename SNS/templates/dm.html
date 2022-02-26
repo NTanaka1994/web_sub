@@ -19,14 +19,6 @@
             </div>
         </div>
         <title>DM</title>
-        <style>
-            #wrapper {
-                height: 200px;
-                width: 300px;
-                left: 50%;
-                overflow-y: scroll;
-            }
-        </style>
         <script>
             function dmajax(){
                 var url="dm_ajax?src_id={{src_id|safe}}&dst_id={{dst_id|safe}}";
@@ -35,20 +27,41 @@
                 req.onreadystatechange = function () {
                     if (req.readyState == 4 && req.status == 200) {
                         res = req.responseText;
-                        console.log(res);
                     }
                 };
                 req.open("GET", url, false);
                 req.send(null);
                 let target=document.getElementById("scroll-inner");
-                target.innerHTML=res;
-                target.scrollIntoView(false);
+                let tmp=document.getElementById('tmp');
+                tmp.innerHTML=res;
+                let tmp2=document.getElementById('tmp');
+                
+                if(tmp2.textContent!=target.textContent){
+                    console.log("src:\n"+target.innerHTML);
+                    console.log("res:\n"+res);
+                    
+                    target.innerHTML=res;
+                    target.scrollIntoView(false);
+                }
                 setTimeout(function(){
                     dmajax();
                 },1000)
             }
             window.addEventListener("load",function(){
+                var url="dm_ajax?src_id={{src_id|safe}}&dst_id={{dst_id|safe}}";
+                var res = "";
+                var req = new XMLHttpRequest();
+                req.onreadystatechange = function () {
+                    if (req.readyState == 4 && req.status == 200) {
+                        res = req.responseText;
+                    }
+                };
+                req.open("GET", url, false);
+                req.send(null);
                 let target = document.getElementById('scroll-inner');
+                let tmp=document.getElementById('tmp');
+                tmp.innerHTML=res;
+                target.innerHTML=res;
                 target.scrollIntoView(false);
                 setTimeout(function(){
                     dmajax();
@@ -78,5 +91,8 @@
                 </td>
             </tr>
         </table>
+        <div id="tmp" style="display: none;">
+
+        </div>
     </body>
 </html>
