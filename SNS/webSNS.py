@@ -468,7 +468,7 @@ def dm_ajax():
         for col in cur2:
             dst_hn.append(col[0])
     conn.close()
-    res="<table align=\"center\">"
+    res="<table align=\"center\"><tbody>"
     for i in range(len(src_hn)):
         if src_hn[i]==session["hn"]:
             res=res+"<tr><td></td><td bgcolor=#00FF00><pre>"+html.escape(msg[i])+"</pre></td><td bgcolor=#00FF00>"+html.escape(src_hn[i])+"</td></tr>"
@@ -476,10 +476,10 @@ def dm_ajax():
         else:
             res=res+"<tr><td>"+html.escape(src_hn[i])+"</td><td><pre>"+html.escape(msg[i])+"</pre></td><td></td></tr>"
             res=res+"<tr><td colspan=\"2\" align=\"left\">"+str(time)[2:21]+"</td><td></td></tr>"
-    res=res+"</table>"
+    res=res+"</tbody></table>"
     return res
         
-#掲示板(
+#掲示板
 
 #クリックジャッキング
 @app.after_request
